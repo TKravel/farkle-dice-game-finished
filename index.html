@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="farkle.css" />
+		<title>Farkle!</title>
+	</head>
+
+	<body>
+		<header class="row header">Welcome to Farkle!</header>
+		<div id="current-player-container" class="row hidden">
+			<h2 class="current-player">
+				Current Turn: <span id="current-player-name">Player 1</span>
+			</h2>
+		</div>
+		<div class="row score-board-container">
+			<p class="score-board">
+				Player 1 Score: <span id="player1-score">0</span>
+			</p>
+			<p class="score-board">
+				Player 2 Score: <span id="player2-score">0</span>
+			</p>
+		</div>
+		<div class="row">
+			<!-- Dice images -->
+			<div class="dice">
+				<img
+					src="images/1.png"
+					id="die1"
+					data-number="0"
+					onclick="diceClick(this)"
+				/>
+				<img
+					src="images/2.png"
+					id="die2"
+					data-number="1"
+					onclick="diceClick(this)"
+				/>
+				<img
+					src="images/3.png"
+					id="die3"
+					data-number="2"
+					onclick="diceClick(this)"
+				/>
+				<img
+					src="images/4.png"
+					id="die4"
+					data-number="3"
+					onclick="diceClick(this)"
+				/>
+				<img
+					src="images/5.png"
+					id="die5"
+					data-number="4"
+					onclick="diceClick(this)"
+				/>
+				<img
+					src="images/6.png"
+					id="die6"
+					data-number="5"
+					onclick="diceClick(this)"
+				/>
+			</div>
+		</div>
+		<!-- Scoring -->
+		<div id="turn-score" class="row score">0</div>
+
+		<!-- Button row -->
+		<div id="start-button" class="row start-button">
+			<button class="button bank" onclick="startGame()">
+				Start Game!
+			</button>
+		</div>
+		<div id="button-container" class="row button-container hidden">
+			<button
+				id="roll-button"
+				class="button roll"
+				onclick="rollDice()"
+				disabled="true"
+			>
+				Roll Dice
+			</button>
+			<button
+				id="bank-button"
+				class="button bank"
+				onclick="bankScore()"
+				disabled="true"
+			>
+				Bank Score
+			</button>
+		</div>
+		<script
+			type="text/javascript"
+			src="farkle.js"
+			onload="initializeDice()"
+		></script>
+	</body>
+</html>

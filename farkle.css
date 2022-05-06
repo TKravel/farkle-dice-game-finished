@@ -1,0 +1,94 @@
+img{
+	width:80px;
+}
+body{
+	background-color: #fff;
+	background-image: linear-gradient(-90deg, #667be6, #754da3);
+	font-family: arial;
+}
+.row{
+	margin:auto;
+	width: 800px;
+	max-width: 100%;
+}
+.header{
+	height: 100px;
+	max-height: 100%;
+	font-size: 50px;
+	text-align: center;
+	line-height: 100px;
+	font-family: arial;
+	color: #fff;
+}
+.current-player {
+	color: white;
+	text-align: center;
+}
+.score-board-container {
+	color: #fff;
+	display: flex;
+	font-size: 1.5rem;
+	justify-content: space-around;
+}
+.dice{
+	max-width: 520px;
+	margin:0 auto;
+}
+.score{
+	background-color: rgba(52,52,52,0.3);
+	color: #fff;
+	height: 60px;
+	max-height:100%;
+	font-size: 32px;
+	text-align: center;
+	line-height: 60px;
+	width:120px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.alert-farkle {
+	background-color: transparent;
+	color: red;
+	width: 150px;
+}
+.button {
+  background-color: green;
+  border-radius: 5px;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3); 
+box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
+  color: white;
+  padding: 15px 32px;
+  margin: 0 5px;
+  text-align: center;
+  border: none;
+  display: inline-block;
+  font-size: 16px;
+  transition: all 500ms;
+}
+.button:disabled {
+	background-color: rgba(0, 128, 0, 0.4);
+	color: rgba(255, 255, 255, 0.4);
+}
+.start-button, .button-container{
+	text-align: center;
+}
+.game-controls{
+	width:20%;
+	margin: 0 auto;
+}
+.roll:hover:not(:disabled){
+	-webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5); 
+box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.bank:hover:not(:disabled){
+	-webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5); 
+box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.transparent{
+	/*For dice that are selected*/
+	opacity: 0.3;
+}
+
+.hidden {
+	display: none;
+}
