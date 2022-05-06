@@ -6,15 +6,16 @@ Farkle is a multiplayer dice game. Take turns rolling 6 dice trying to get 1's, 
 
 ## Scoring
 
--   1's count as 100pts
--   5's count as 50pts
-
--   triple 1's count as 1000pts
--   triple 2's count as 200pts
--   triple 3's count as 300pts
--   triple 4's count as 400pts
--   triple 5's count as 500pts
--   triple 6's count as 200pts
+| Die value  | Points  |
+| :--------: | :------ |
+|    1's     | 100pts  |
+|    5's     | 50pts   |
+| triple 1's | 1000pts |
+| triple 2's | 200pts  |
+| triple 3's | 300pts  |
+| triple 4's | 400pts  |
+| triple 5's | 500pts  |
+| triple 6's | 200pts  |
 
 ### Tech used
 
