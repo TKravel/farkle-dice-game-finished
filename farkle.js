@@ -61,7 +61,20 @@ const resetDice = () => {
 			resetDice();
 		}
 	}
-	updateDiceImg();
+
+	shakeDice();
+	setTimeout(() => {
+		shakeDice();
+		updateDiceImg();
+	}, 500);
+};
+
+const shakeDice = () => {
+	for (const die of dice) {
+		if (!die.classList.contains('transparent')) {
+			die.classList.toggle('shake-dice');
+		}
+	}
 };
 
 const resetTurnScore = () => {
@@ -83,7 +96,11 @@ const rollDice = () => {
 			die.value = Math.floor(Math.random() * 6 + 1);
 		}
 	}
-	updateDiceImg();
+	shakeDice();
+	setTimeout(() => {
+		shakeDice();
+		updateDiceImg();
+	}, 500);
 
 	// check unselected dice for farkle
 	if (
