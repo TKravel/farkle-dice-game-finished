@@ -14,8 +14,14 @@ body{
 	justify-content: center;
 	align-items: center;
 }
+@media screen and (max-width: 500px){
+	.game-container {
+		justify-content: space-around;
+		min-height: 90vh;
+	}
+}
 .row{
-	margin:auto;
+	margin: 0 auto;
 	width: 800px;
 	max-width: 100%;
 }
@@ -43,17 +49,31 @@ body{
 	font-size: 1.5rem;
 	justify-content: space-around;
 }
+.player-indicator {
+	background-color: #f66;
+	border: 1px solid rgb(173, 67, 67);
+	border-radius: 50%;
+	display: inline-block;
+	height: 1rem;
+	width: 1rem;
+	margin-left: -1.5rem;
+	margin-right: .5rem;
+	opacity: 0;
+	transition: all 250ms;
+}
+.active-player{
+	opacity: 1;
+}
 @media screen and (max-width: 500px){
 	.score-board-container {
-		flex-direction: column;
-		text-align: center;
+		justify-content: space-around;
 	}
 }
 .dice{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
-	margin: 2rem auto;
+	margin: 1rem auto;
 	max-width: 520px;
 }
 .shake-dice {

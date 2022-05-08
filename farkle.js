@@ -20,9 +20,6 @@ const gameData = {
 };
 
 // dom element variables
-const currentPlayerDisplay = document.getElementById(
-	'current-player-container'
-);
 const dice = document.getElementsByTagName('img');
 const turnScore = document.getElementById('turn-score');
 const startButton = document.getElementById('start-button');
@@ -84,7 +81,9 @@ const resetTurnScore = () => {
 const startGame = () => {
 	startButton.classList.toggle('hidden');
 	gameControls.classList.toggle('hidden');
-	currentPlayerDisplay.classList.toggle('hidden');
+	document
+		.getElementsByClassName('player-indicator')[0]
+		.classList.add('active-player');
 	resetDice();
 	resetTurnScore();
 };
@@ -102,12 +101,16 @@ const rollDice = () => {
 		updateDiceImg();
 	}, 500);
 
-	// check unselected dice for farkle
-	if (
-		isFarkle(sortDice(document.querySelectorAll('img:not(.transparent)')))
-	) {
-		handleFarkle();
-	}
+	// check unselected dice for farkle after animation stops
+	setTimeout(() => {
+		if (
+			isFarkle(
+				sortDice(document.querySelectorAll('img:not(.transparent)'))
+			)
+		) {
+			handleFarkle();
+		}
+	}, 1000);
 };
 
 /*Updating images of dice given values of rollDice*/
@@ -230,13 +233,16 @@ const displayCurrentRollTotal = (total) => {
 };
 
 const changePlayer = () => {
-	const currentPlayer = document.getElementById('current-player-name');
+	const [player1, player2] =
+		document.getElementsByClassName('player-indicator');
 	if (gameData.currentTurn === 'Player1') {
 		gameData.currentTurn = 'Player2';
-		currentPlayer.innerText = 'Player 2';
+		player1.classList.remove('active-player');
+		player2.classList.add('active-player');
 	} else {
 		gameData.currentTurn = 'Player1';
-		currentPlayer.innerText = 'Player 1';
+		player1.classList.add('active-player');
+		player2.classList.remove('active-player');
 	}
 };
 
