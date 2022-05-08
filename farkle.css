@@ -51,7 +51,7 @@ body{
 }
 .player-indicator {
 	background-color: #f66;
-	border: 1px solid rgb(173, 67, 67);
+	border: 1px solid rgb(141, 54, 54);
 	border-radius: 50%;
 	display: inline-block;
 	height: 1rem;
@@ -59,7 +59,7 @@ body{
 	margin-left: -1.5rem;
 	margin-right: .5rem;
 	opacity: 0;
-	transition: all 250ms;
+	transition: all 750ms;
 }
 .active-player{
 	opacity: 1;
