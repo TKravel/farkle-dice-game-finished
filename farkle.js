@@ -3,6 +3,7 @@ const diceArr = [];
 // game and player data
 const gameData = {
 	currentTurn: 'Player1',
+	clicksSinceRoll: 0,
 	finalRound: {
 		round: 0,
 		status: null,
@@ -63,6 +64,7 @@ const resetDice = () => {
 	setTimeout(() => {
 		shakeDice();
 		updateDiceImg();
+		gameData.clicksSinceRoll = 0;
 	}, 500);
 };
 
@@ -95,6 +97,9 @@ const rollDice = () => {
 			die.value = Math.floor(Math.random() * 6 + 1);
 		}
 	}
+	if (!rollButton.getAttribute('disabled')) {
+		toggleButton(rollButton);
+	}
 	shakeDice();
 	setTimeout(() => {
 		shakeDice();
@@ -109,6 +114,8 @@ const rollDice = () => {
 			)
 		) {
 			handleFarkle();
+		} else {
+			gameData.clicksSinceRoll = 0;
 		}
 	}, 1000);
 };
@@ -123,24 +130,28 @@ const updateDiceImg = () => {
 };
 
 const diceClick = (img) => {
+	const selectedDie = img.getAttribute('data-number');
+	const rollButtonDisabled = rollButton.getAttribute('disabled');
 	// return if already clicked
 	if (img.classList.contains('transparent')) {
-		return;
+		diceArr[selectedDie].clicked = 0;
+		gameData.clicksSinceRoll -= 1;
+		img.classList.toggle('transparent');
+		if (gameData.clicksSinceRoll === 0 && rollButtonDisabled === null) {
+			toggleButton(rollButton);
+		}
+	} else {
+		img.classList.add('transparent');
+		diceArr[selectedDie].clicked = 1;
+		gameData.clicksSinceRoll += 1;
 	}
 
-	// add css and track as clicked
-	img.classList.add('transparent');
-	const selectedDie = img.getAttribute('data-number');
-	diceArr[selectedDie].clicked = 1;
-
 	// handle roll button disabled status
-	const rollButtonDisabled = rollButton.getAttribute('disabled');
+
 	const clickedDice = document.getElementsByClassName('transparent');
-	if (clickedDice.length === 0 && rollButtonDisabled === 'false') {
+	if (clickedDice.length === 6 && rollButtonDisabled === null) {
 		toggleButton(rollButton);
-	} else if (clickedDice.length > 0 && rollButtonDisabled === 'true') {
-		toggleButton(rollButton);
-	} else if (clickedDice.length === 6) {
+	} else if (gameData.clicksSinceRoll === 1) {
 		toggleButton(rollButton);
 	}
 
@@ -200,6 +211,8 @@ const calculateScore = (clickedDice) => {
 		}
 	}
 	if (score > 0 && bankButton.getAttribute('disabled') === 'true') {
+		toggleButton(bankButton);
+	} else if (score === 0 && bankButton.getAttribute('disabled') === null) {
 		toggleButton(bankButton);
 	}
 	return score;
@@ -270,7 +283,6 @@ const handleFarkle = () => {
 	turnScore.innerText = 'FARKLE!';
 	turnScore.classList.toggle('alert-farkle');
 	// disable buttons
-	toggleButton(rollButton);
 	toggleButton(bankButton);
 	// remove alert / reset and change player
 	setTimeout(() => {
