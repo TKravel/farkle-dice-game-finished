@@ -131,30 +131,31 @@ const updateDiceImg = () => {
 
 const diceClick = (img) => {
 	const selectedDie = img.getAttribute('data-number');
+	const clickedDice = document.getElementsByClassName('transparent');
 	const rollButtonDisabled = rollButton.getAttribute('disabled');
-	// return if already clicked
+	// handle clicking / unclick dice and roll button disabled status
 	if (img.classList.contains('transparent')) {
 		diceArr[selectedDie].clicked = 0;
 		gameData.clicksSinceRoll -= 1;
 		img.classList.toggle('transparent');
 		if (gameData.clicksSinceRoll === 0 && rollButtonDisabled === null) {
 			toggleButton(rollButton);
+		} else if (
+			gameData.clicksSinceRoll > 0 &&
+			rollButtonDisabled === 'true'
+		) {
+			toggleButton(rollButton);
 		}
 	} else {
 		img.classList.add('transparent');
 		diceArr[selectedDie].clicked = 1;
 		gameData.clicksSinceRoll += 1;
+		if (gameData.clicksSinceRoll === 1) {
+			toggleButton(rollButton);
+		} else if (clickedDice.length === 6 && rollButtonDisabled === null) {
+			toggleButton(rollButton);
+		}
 	}
-
-	// handle roll button disabled status
-
-	const clickedDice = document.getElementsByClassName('transparent');
-	if (clickedDice.length === 6 && rollButtonDisabled === null) {
-		toggleButton(rollButton);
-	} else if (gameData.clicksSinceRoll === 1) {
-		toggleButton(rollButton);
-	}
-
 	// calculate and display turn score
 	displayCurrentRollTotal(calculateScore(sortDice(clickedDice)));
 };
