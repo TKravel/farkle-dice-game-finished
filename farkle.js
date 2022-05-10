@@ -37,6 +37,7 @@ const initializeDice = () => {
 		diceArr[i].id = `die${i + 1}`;
 		diceArr[i].value = i + 1;
 		diceArr[i].clicked = 0;
+		diceArr[i].lockSelection = 0;
 	}
 };
 
@@ -47,6 +48,7 @@ const resetDice = () => {
 		diceArr[i].id = `die${i + 1}`;
 		diceArr[i].value = Math.floor(Math.random() * 6 + 1);
 		diceArr[i].clicked = 0;
+		diceArr[i].lockSelection = 0;
 		// remove css from selected dice
 		if (dice[i].classList.contains('transparent')) {
 			dice[i].classList.remove('transparent');
@@ -66,6 +68,17 @@ const resetDice = () => {
 		updateDiceImg();
 		gameData.clicksSinceRoll = 0;
 	}, 500);
+};
+
+// lock selections, call after dice roll
+const lockDiceSelections = () => {
+	for (const die of diceArr) {
+		console.log(die);
+		if (die.clicked === 1) {
+			die.lockSelection = 1;
+		}
+	}
+	console.log(diceArr);
 };
 
 const shakeDice = () => {
@@ -116,6 +129,7 @@ const rollDice = () => {
 			handleFarkle();
 		} else {
 			gameData.clicksSinceRoll = 0;
+			lockDiceSelections();
 		}
 	}, 1000);
 };
@@ -133,6 +147,10 @@ const diceClick = (img) => {
 	const selectedDie = img.getAttribute('data-number');
 	const clickedDice = document.getElementsByClassName('transparent');
 	const rollButtonDisabled = rollButton.getAttribute('disabled');
+
+	if (diceArr[selectedDie].lockSelection === 1) {
+		return;
+	}
 	// handle clicking / unclick dice and roll button disabled status
 	if (img.classList.contains('transparent')) {
 		diceArr[selectedDie].clicked = 0;
